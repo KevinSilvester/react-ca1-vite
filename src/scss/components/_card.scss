@@ -1,0 +1,10 @@
+.card {
+   transform: scale(0.5);
+   animation: expand 0.25s forwards;
+
+   @keyframes expand {
+      from  { transform: scale(0.5) }
+      to    { transform: scale(1) }
+   }
+}
+

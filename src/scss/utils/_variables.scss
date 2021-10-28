@@ -1,0 +1,19 @@
+:root {
+   --black-opaque: #00000080;
+   --magenta-opaque-1: hsla(349, 97%, 63%, 0.6);
+   --magenta-opaque-2: hsla(349, 97%, 63%, 0.95);
+
+   --dark-grey-1: #363636;
+   
+   --grey-1: #bababa;
+
+   --light-grey-1: hsl(0, 3%, 93%);
+}
+
+$text: var(--light-grey-1);
+
+$modal-wrapper-bg: var(--black-opaque);
+$modal-input: var(--magenta-opaque-1);
+$modal-input-hov: var(--magenta-opaque-2);
+$modal-form-bg: var(--dark-grey-1);
+$modal-form-border: var(--grey-1)

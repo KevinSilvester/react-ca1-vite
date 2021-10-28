@@ -1,0 +1,78 @@
+.modal {
+   &__wrapper {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+      background: $modal-wrapper-bg;
+   }
+
+   &__form {
+      background: $modal-form-bg;
+      height: calc(25rem + 10%);
+      width: calc(25rem + 10%);
+      text-align: center;
+      border-radius: 20px;
+      border: solid $modal-form-border 3px;
+
+      &-title {
+         margin-top: 1rem;
+         margin-bottom: 0.5rem;
+         font-weight: 600;
+      }
+
+      &-input-container {
+         display: flex;
+         width: 100%;
+         height: 75%;
+         flex-direction: column;
+         justify-content: space-around;
+      }
+
+      &-group {
+         width: 100%;
+         display: grid;
+         grid-template-columns: 2fr 4fr;
+         align-items: center;
+      }
+
+      &-label {
+         text-align: right;
+         margin-right: 1.5rem;
+         padding-left: 1rem;
+      }
+
+      &-input, &-select {
+         width: 20rem;
+         height: 2.25rem;
+         border-radius: 0.35rem;
+         border: solid $modal-input 2px;
+         outline: none;
+         background: inherit;
+         transition: all 0.2s ease-in-out;
+
+         &:focus {
+            border: solid $modal-input-hov 2px;
+         }
+      }
+      
+      &-input {
+         width: 20rem;
+         padding: 5px;
+      }
+
+      &-select {
+         width: 20rem;
+      }
+
+      &-btn {
+         margin: 0.5rem 4rem 0 4rem;
+
+      }
+   }
+}
