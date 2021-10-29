@@ -31,15 +31,12 @@ const App = () => {
                      locality: e.address.addressLocality,
                      county: e.address.addressRegion,
                   },
-                  coordinates: {
-                     latitude: e.geo.latitude,
-                     longitude: e.geo.longitude,
-                  },
                   image: e.image.url,
                   tags: e.tags,
                   phone: e.telephone,
                   website: e.url,
                };
+               console.log(place)
                temp.push(place);
                index++
             });

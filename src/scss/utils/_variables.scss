@@ -1,9 +1,11 @@
 :root {
    --black-opaque: #00000080;
-   --magenta-opaque-1: hsla(349, 97%, 63%, 0.6);
-   --magenta-opaque-2: hsla(349, 97%, 63%, 0.95);
+   --magenta-opaque: hsla(349, 97%, 63%, 0.6);
+
+   --magenta-1: hsla(349, 97%, 63%, 1);
 
    --dark-grey-1: #363636;
+   --dark-grey-2: hsl(0, 0%, 29%);
    
    --grey-1: #bababa;
 
@@ -13,7 +15,10 @@
 $text: var(--light-grey-1);
 
 $modal-wrapper-bg: var(--black-opaque);
-$modal-input: var(--magenta-opaque-1);
-$modal-input-hov: var(--magenta-opaque-2);
 $modal-form-bg: var(--dark-grey-1);
-$modal-form-border: var(--grey-1)
+$modal-form-border: var(--grey-1);
+
+$input-border: var(--magenta-opaque);
+$input-focus-border: var(--magenta-1);
+$input-focus-bg: var(--dark-grey-2);
+

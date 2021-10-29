@@ -10,6 +10,18 @@
       place-items: center;
       z-index: 1;
       background: $modal-wrapper-bg;
+      opacity: 20%;
+      animation: 0.2s forwards;
+
+      @keyframes modal_open {
+         from  {opacity: 0%}
+         to    {opacity: 100%}
+      }
+
+      @keyframes modal_close {
+         from  {opacity: 100%}
+         to    {opacity: 0%}
+      }
    }
 
    &__form {
@@ -19,6 +31,7 @@
       text-align: center;
       border-radius: 20px;
       border: solid $modal-form-border 3px;
+      
 
       &-title {
          margin-top: 1rem;
@@ -51,13 +64,14 @@
          width: 20rem;
          height: 2.25rem;
          border-radius: 0.35rem;
-         border: solid $modal-input 2px;
+         border: solid $input-border 3px;
          outline: none;
          background: inherit;
-         transition: all 0.2s ease-in-out;
+         transition: all 0.1s ease-in-out;
 
          &:focus {
-            border: solid $modal-input-hov 2px;
+            border: solid $input-focus-border 3px;
+            background: $input-focus-bg;
          }
       }
       

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Edit from './Edit'
+import Modal from './Modal'
 
 const Card = (props) => {
 	const attraction = props.place;
@@ -10,7 +10,7 @@ const Card = (props) => {
 	return (
 		<div className="col-md-4">
          {console.log('Card rendered', attraction.id)}
-         {open && <Edit attr={attraction} close={handleOpen} />}
+         {open && <Modal attr={attraction} close={handleOpen} mode='edit' />}
 			<div className="card">
 				<img src={attraction.image} alt={attraction.name} className="card-img-top" />
 				<div className="card-body">
