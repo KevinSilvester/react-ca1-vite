@@ -1,0 +1,92 @@
+.btn {
+   &__wrapper {
+      background: $btn-wrapper-bg;
+      outline: none;
+      border: none;
+      border-radius: 0.35rem;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease-in-out;
+      cursor: pointer;
+      position: relative;
+
+      &--lg {
+         width: 20rem;
+         height: 2.25rem;
+      }
+
+      &--sm {
+         height: 2.25rem;
+         width: 6rem;
+      }
+      
+      &:hover {
+         background: $btn-wrapper-bg-hov;
+      }
+
+      &[data-tooltip=true] {
+         &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 190%) rotate(45deg);
+            opacity: 0;
+            background: $tooltip-bg;
+            z-index: 100;
+            width: 0.8rem;
+            height: 0.8rem;
+            transition: all 0.1s ease;
+            pointer-events: none;
+            user-select: none;
+         }
+
+         &::after {
+            content: attr(data-msg);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 118%);
+            opacity: 0;
+            background: $tooltip-bg;
+            z-index: 100;
+            font-size: 0.8rem;
+            width: 7rem;
+            padding: 0.2rem;
+            border-radius: 5px;
+            transition: all 0.1s ease-in-out;
+            pointer-events: none;
+            user-select: none;
+         }
+
+         &:hover {
+            &::after, &::before {
+               opacity: 1;
+            }
+         }
+      }
+   }
+
+   &__body {
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span {
+         margin-left: 3px;
+      }
+
+      &--pink {
+         height: 100%;
+         width: 100%;
+         background: transparent;
+      }
+
+      &--grey {
+         height: 100%;
+         width: 100%;
+         background: $btn-body-bg
+      }
+   }
+}

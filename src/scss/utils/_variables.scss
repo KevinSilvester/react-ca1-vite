@@ -1,11 +1,14 @@
 :root {
    --black-opaque: #00000080;
-   --magenta-opaque: hsla(349, 97%, 63%, 0.6);
+   --pink-opaque: hsla(349, 97%, 63%, 0.6);
 
-   --magenta-1: hsla(349, 97%, 63%, 1);
+   --pink-1: hsl(349, 97%, 63%);
+   --pink-2: hsl(349, 97%, 61%);
+   --pink-3: hsl(345, 89%, 69%);
 
-   --dark-grey-1: #363636;
+   --dark-grey-1: hsl(0, 0%, 21%);
    --dark-grey-2: hsl(0, 0%, 29%);
+   --dark-grey-3: hsl(0, 0%, 16%);
    
    --grey-1: #bababa;
 
@@ -15,10 +18,19 @@
 $text: var(--light-grey-1);
 
 $modal-wrapper-bg: var(--black-opaque);
-$modal-form-bg: var(--dark-grey-1);
+$modal-form-bg: var(--dark-grey-3);
 $modal-form-border: var(--grey-1);
 
-$input-border: var(--magenta-opaque);
-$input-focus-border: var(--magenta-1);
+$input-border: var(--pink-opaque);
+$input-focus-border: var(--pink-1);
 $input-focus-bg: var(--dark-grey-2);
+
+$btn-wrapper-bg: var(--pink-opaque);
+$btn-wrapper-bg-hov: var(--pink-1);
+$btn-body-bg: var(--dark-grey-3);
+
+$card-bg: var(--dark-grey-3);
+
+$tooltip-bg: var(--pink-1);
+$tooltip-border: var(--pink-1);
 

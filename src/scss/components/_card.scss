@@ -1,10 +1,35 @@
 .card {
+   background: $card-bg;
    transform: scale(0.5);
    animation: expand 0.25s forwards;
+   margin-top: 2rem;
 
    @keyframes expand {
       from  { transform: scale(0.5) }
       to    { transform: scale(1) }
+   }
+
+   &__link {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+
+      &.disabled {
+         pointer-events: none;
+      }
+
+      span {
+         margin-left: 5px;
+      }
+   }
+
+   &__btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
    }
 }
 
