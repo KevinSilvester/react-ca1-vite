@@ -10,9 +10,9 @@ export const DataProvider = (props) => {
    return (
       <DataCtx.Provider
          value={{
-            e: [edit, setEdit],
-            r: [remove, setRemove],
-            a: [add, setAdd]
+            _edit: [edit, setEdit],
+            _remove: [remove, setRemove],
+            _add: [add, setAdd]
          }}
       >
          {props.children}

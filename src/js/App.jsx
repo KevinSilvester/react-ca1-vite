@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useContext, useMemo, useCallback } from 'react'
 import ReactDOM from 'react-dom'
-import './scss/index.scss'
+import './../scss/index.scss'
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/css/all.css'
+import { DataCtx, DataProvider } from './contexts/DataCtx'
+import NavBar from './components/Navbar'
 import Search from './components/Search'
 import Table from './components/Table'
-import { DataCtx, DataProvider } from './contexts/DataCtx'
+import { randomId } from './utils/randomId'
 
 const App = () => {
-   const { e, r, a } = useContext(DataCtx)
-   const [edit, setEdit] = e
-   const [add, setAdd] = a
-   const [remove, setRemove] = r
-   const [fetchInfo, setFetchInfo] = useState({ error: null, loaded: false })
-   const [filterData, setFilterData] = useState(null)
+   const { _edit, _remove, _add } = useContext(DataCtx)
+   const [edit, setEdit] = _edit
+   const [add, setAdd] = _add
+   const [remove, setRemove] = _remove
+   const [error, setError] = useState(null)
+   const [data, setData] = useState(null)
    const [displayData, setDisplayData] = useState(null)
 
    useEffect(() => {
@@ -21,10 +23,9 @@ const App = () => {
          .then((res) => res.json())
          .then((jsonData) => {
             let temp = []
-            let index = 0
             jsonData.map((e) => {
                const place = {
-                  id: index,
+                  id: randomId(),
                   name: e.name,
                   type: e['@type'],
                   address: {
@@ -36,28 +37,23 @@ const App = () => {
                   phone: e.telephone,
                   website: e.url
                }
-               console.log(place)
                temp.push(place)
-               index++
             })
-            setFetchInfo({ error: null, loaded: true })
-            setFilterData(temp)
-            setDisplayData(temp)
+            setData([...temp])
+            setDisplayData([...temp])
          })
-         .catch((err) => setFetchInfo({ error: err, loaded: true }))
+         .catch((err) => setError(err))
    }, [])
 
    const handleFilterSort = (data, sortVal) => { }
 
    const handleSearch = (searchTerm) => {
       if (searchTerm.length === 0) {
-         setDisplayData([...filterData])
-         console.log('handleSearch')
+         setDisplayData([...data])
          return
       }
-      console.log('handleSearch')
       setDisplayData([
-         ...filterData.filter((place) =>
+         ...data.filter((place) =>
             place.name.toLowerCase().match(new RegExp(searchTerm.toLowerCase()))
          )
       ])
@@ -65,7 +61,7 @@ const App = () => {
 
    const TableComp = useMemo(() => <Table data={displayData} />, [displayData])
 
-   if (fetchInfo.error) return <div>Fetch Failed</div>
+   if (error) return <div>Fetch Failed</div>
 
    if (displayData === null) return <div>Loading....</div>
 

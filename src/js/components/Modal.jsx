@@ -2,12 +2,13 @@ import { useState, useEffect, useContext, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { DataCtx } from '../contexts/DataCtx'
 import Button from './Button'
+import List from './List'
 import counties from '../data/counties'
 import { deepEqual } from '../utils/compare'
 
 const Modal = (props) => {
-   const { e } = useContext(DataCtx)
-   const [edit, setEdit] = e
+   const { _edit } = useContext(DataCtx)
+   const [edit, setEdit] = _edit
 
    const close = props.close
    const attraction = props.attr
@@ -22,14 +23,14 @@ const Modal = (props) => {
    const [type, setType] = addMode ? useState('') : useState(attraction.type)
    const [tags, setTabs] = addMode ? useState('') : useState(attraction.tags)
 
-   const [isOpen, setIsOpen] = useState(true)
+   const [modalOpen, setModalOpen] = useState(true)
 
    useEffect(() => nameInput.current.focus(), [])
 
    const nameInput = useRef(null)
 
    const handleClose = () => {
-      setIsOpen(false)
+      setModalOpen(false)
       setTimeout(() => close(), 200)
    }
 
@@ -59,17 +60,22 @@ const Modal = (props) => {
 
    const expandTags = e => {
       e.preventDefault()
+      console.log(e)
    }
 
    const expandTypes = e => {
       e.preventDefault()
    }
 
+   const handleTags = e => {
+
+   }
+
    return createPortal(
       <div
          className='modal__wrapper'
          onClick={() => handleClose()}
-         style={{ animationName: isOpen ? 'modal_open' : 'modal_close' }}
+         style={{ animationName: modalOpen ? 'modal_open' : 'modal_close' }}
       >
          <form
             onSubmit={() => handleSubmit()}
@@ -159,6 +165,7 @@ const Modal = (props) => {
                </div>
                <div className='modal__form-group'>
                   <span className='modal__form-label'>Tags</span>
+                  <List expand={expandTags} init={tags} return={handleTags} />
                   <Button fill large click={expandTags}>
                      <i className='fas fa-chevron-up'></i>
                   </Button>

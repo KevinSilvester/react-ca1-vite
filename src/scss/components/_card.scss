@@ -1,7 +1,7 @@
 .card {
    background: $card-bg;
    transform: scale(0.5);
-   animation: expand 0.25s forwards;
+   animation: expand 0.3s forwards;
    margin-top: 2rem;
 
    @keyframes expand {

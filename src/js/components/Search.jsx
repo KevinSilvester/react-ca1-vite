@@ -9,7 +9,6 @@ const Search = (props) => {
 
    return (
       <div role='form' className='search__container'>
-         {console.log('Search rendered')}
          <input
             className='search__input'
             type='text'
