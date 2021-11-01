@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useContext, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useContext, useMemo, useReducer, useCallback } from 'react'
 import ReactDOM from 'react-dom'
-import './../scss/index.scss'
-import 'bootstrap'
 import '@fortawesome/fontawesome-free/css/all.css'
+import 'bootstrap'
+import './../scss/index.scss'
 import { DataCtx, DataProvider } from './contexts/DataCtx'
+import { initialState, dataReducer } from './reducer/dataReducer'
+
 import NavBar from './components/Navbar'
 import Search from './components/Search'
 import Table from './components/Table'
@@ -14,16 +16,16 @@ const App = () => {
    const [edit, setEdit] = _edit
    const [add, setAdd] = _add
    const [remove, setRemove] = _remove
-   const [error, setError] = useState(null)
-   const [data, setData] = useState(null)
-   const [displayData, setDisplayData] = useState(null)
+
+   const [state, dispatch] = useReducer(dataReducer, initialState)
+   const { data, displayData, error, loaded } = state
 
    useEffect(() => {
       fetch('http://localhost:8000/results')
-         .then((res) => res.json())
-         .then((jsonData) => {
+         .then(res => res.json())
+         .then(jsonData => {
             let temp = []
-            jsonData.map((e) => {
+            jsonData.map(e => {
                const place = {
                   id: randomId(),
                   name: e.name,
@@ -32,43 +34,42 @@ const App = () => {
                      locality: e.address.addressLocality,
                      county: e.address.addressRegion
                   },
-                  image: e.image.url,
                   tags: e.tags,
                   phone: e.telephone,
                   website: e.url
                }
                temp.push(place)
             })
-            setData([...temp])
-            setDisplayData([...temp])
+            dispatch({ type: 'FETCH_SUCCESS', data: temp })
          })
-         .catch((err) => setError(err))
+         .catch(err => dispatch({ type: 'FETCH_FAIL', error: err }))
    }, [])
 
-   const handleFilterSort = (data, sortVal) => { }
-
-   const handleSearch = (searchTerm) => {
-      if (searchTerm.length === 0) {
-         setDisplayData([...data])
-         return
+   useEffect(() => {
+      console.log(edit)
+      if (Object.keys(edit).length !== 0) {
+         dispatch({ type: 'EDIT', attraction: edit })
       }
-      setDisplayData([
-         ...data.filter((place) =>
-            place.name.toLowerCase().match(new RegExp(searchTerm.toLowerCase()))
-         )
-      ])
+   }, [edit])
+
+   const handleFilterSort = (data, sortVal) => {}
+
+   const handleSearch = query => {
+      query.length === 0
+         ? dispatch({ type: 'SEARCH_CLEAR' })
+         : dispatch({ type: 'SEARCH_QUERY', query: query })
    }
 
    const TableComp = useMemo(() => <Table data={displayData} />, [displayData])
 
    if (error) return <div>Fetch Failed</div>
 
-   if (displayData === null) return <div>Loading....</div>
+   if (!loaded) return <div>Loading....</div>
 
    return (
       <div>
-         {console.log(edit, add, remove)}
-         <Search searchTerm={handleSearch} />
+         <Search query={handleSearch} />
+         {console.log(data)}
          {TableComp}
       </div>
    )

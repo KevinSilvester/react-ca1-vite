@@ -1,35 +1,59 @@
 .card {
-   background: $card-bg;
-   transform: scale(0.5);
-   animation: expand 0.3s forwards;
-   margin-top: 2rem;
+	background: $card-bg;
+	transform: scale(0.5);
+	animation: expand 0.3s forwards;
+	margin-top: 2rem;
+	height: 24.5rem;
 
-   @keyframes expand {
-      from  { transform: scale(0.5) }
-      to    { transform: scale(1) }
-   }
+	&__img {
+		height: 100%;
+		position: absolute;
 
-   &__link {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
+		&-container {
+			position: relative;
+			height: 50%;
+			display: grid;
+			place-items: center;
+		}
+	}
 
-      &.disabled {
-         pointer-events: none;
-      }
+	&-title {
+		font-size: 1.1rem !important;
+	}
 
-      span {
-         margin-left: 5px;
-      }
-   }
+	&-subtitle {
+		font-size: 0.95rem;
+	}
 
-   &__btn-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-   }
+	@keyframes expand {
+		from {
+			transform: scale(0.5);
+		}
+		to {
+			transform: scale(1);
+		}
+	}
+
+	&__link {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+
+		&.disabled {
+			pointer-events: none;
+		}
+
+		span {
+			margin-left: 5px;
+		}
+	}
+
+	&__btn-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+	}
 }
-

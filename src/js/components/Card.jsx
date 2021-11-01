@@ -1,24 +1,36 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { DataCtx } from '../contexts/DataCtx'
+import img from './../../assets/ireland.svg'
 import Modal from './Modal'
 import Button from './Button'
 
+// https://codepen.io/nikki-peel/pen/RwavQer
 const Card = (props) => {
    const attraction = props.place
    const [open, setOpen] = useState(false)
+
+   const { _remove } = useContext(DataCtx)
+   const [remove, setRemove] = _remove
 
    const linkButton = useRef(null)
 
    const handleOpen = () => setOpen(!open)
 
+   const handleDelete = () => setRemove(attraction)
+
+   const handleLink = () => {return}
+
    return (
       <div className='col-md-4'>
          {open && <Modal attr={attraction} close={handleOpen} edit />}
          <div className='card'>
-            <img
-               src={attraction.image}
-               alt={attraction.name}
-               className='card-img-top'
-            />
+            <div className="card-img-top card__img-container">
+               <img
+                  src={img}
+                  alt={attraction.name}
+                  className='card__img'
+               />
+            </div>
             <div className='card-body'>
                <h5 className='card-title'>{attraction.name}</h5>
                <h6 className='card-subtitle mb-2 text-muted'>
@@ -30,6 +42,7 @@ const Card = (props) => {
                <div className='card__btn-container'>
                   <Button
                      fill
+                     click={handleLink}
                      attributes={
                         !attraction.website && {
                            ['data-tooltip']: true,
@@ -51,7 +64,7 @@ const Card = (props) => {
                      <i className='fas fa-edit' />
                      <span>Edit</span>
                   </Button>
-                  <Button fill>
+                  <Button fill click={handleDelete}>
                      <i className='fas fa-trash-alt' />
                      <span>Delete</span>
                   </Button>

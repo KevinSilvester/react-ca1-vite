@@ -44,7 +44,6 @@ const Modal = (props) => {
             locality: locality,
             county: county
          },
-         image: img,
          tags: tags,
          phone: phone,
          website: web
