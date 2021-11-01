@@ -19,7 +19,6 @@ const Modal = (props) => {
    const [county, setCounty] = addMode ? useState('') : useState(attraction.address.county)
    const [phone, setPhone] = addMode ? useState('') : useState(attraction.phone)
    const [web, setWeb] = addMode ? useState('') : useState(attraction.website)
-   const [img, setImg] = addMode ? useState('') : useState(attraction.image)
    const [type, setType] = addMode ? useState('') : useState(attraction.type)
    const [tags, setTabs] = addMode ? useState('') : useState(attraction.tags)
 
@@ -149,17 +148,6 @@ const Modal = (props) => {
                      placeholder='Website/Social Media'
                      value={web}
                      onChange={(e) => setWeb(e.target.value)}
-                  />
-               </div>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>Image Link</span>
-                  <input
-                     name='image'
-                     type='text'
-                     className='modal__form-input'
-                     placeholder='Image Link'
-                     value={img}
-                     onChange={(e) => setImg(e.target.value)}
                   />
                </div>
                <div className='modal__form-group'>
