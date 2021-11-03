@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo, useReducer, useCallback } from 'react'
+import React, { useState, useEffect, useContext, useReducer } from 'react'
 import ReactDOM from 'react-dom'
 import '@fortawesome/fontawesome-free/css/all.css'
 import 'bootstrap'
@@ -9,6 +9,9 @@ import { initialState, dataReducer } from './reducer/dataReducer'
 import NavBar from './components/Navbar'
 import Search from './components/Search'
 import Table from './components/Table'
+import Filter from './components/Filter'
+import Card from './components/Card'
+import Sort from './components/Sort'
 import { randomId } from './utils/randomId'
 
 const App = () => {
@@ -26,7 +29,7 @@ const App = () => {
          .then(jsonData => {
             let temp = []
             jsonData.map(e => {
-               const place = {
+               const attraction = {
                   id: randomId(),
                   name: e.name,
                   type: e['@type'],
@@ -38,7 +41,7 @@ const App = () => {
                   phone: e.telephone,
                   website: e.url
                }
-               temp.push(place)
+               temp.push(attraction)
             })
             dispatch({ type: 'FETCH_SUCCESS', data: temp })
          })
@@ -46,9 +49,9 @@ const App = () => {
    }, [])
 
    useEffect(() => {
-      console.log(edit)
       if (Object.keys(edit).length !== 0) {
          dispatch({ type: 'EDIT', attraction: edit })
+         setEdit({})
       }
    }, [edit])
 
@@ -60,7 +63,17 @@ const App = () => {
          : dispatch({ type: 'SEARCH_QUERY', query: query })
    }
 
-   const TableComp = useMemo(() => <Table data={displayData} />, [displayData])
+   const handleSort = value => {
+      if (value === "1") {
+         dispatch({ type: 'SORT_NAME' })
+      } else if (value === "2") {
+         dispatch({ type: 'SORT_COUNTY' })
+      }
+   }
+
+   const handleFilter = query => {
+      dispatch({ type: 'FILTER_COUNTY', query: query })
+   }
 
    if (error) return <div>Fetch Failed</div>
 
@@ -69,8 +82,13 @@ const App = () => {
    return (
       <div>
          <Search query={handleSearch} />
-         {console.log(data)}
-         {TableComp}
+         <Sort value={handleSort} />
+         <Filter query={handleFilter} />
+         <Table>
+            {displayData.map(attraction => (
+               <Card place={attraction} key={attraction.id} />
+            ))}
+         </Table>
       </div>
    )
 }

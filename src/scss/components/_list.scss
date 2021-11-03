@@ -1,0 +1,53 @@
+.list {
+   &__container {
+      position: absolute;
+      bottom: 0;
+      margin-bottom: 2.7rem;
+      left: 12.2rem;
+      background: $list-bg;
+      width: $modal-item-width;
+   }
+
+   &__body {
+      list-style: none;
+      text-align: left;
+      padding: 0;
+      margin: 0;
+   }
+
+   &__item {
+      color: $list-txt;
+   }
+
+   &__form {
+      position: relative;
+      margin: 0rem auto 0.3rem auto;
+      height: 2.23rem;
+      width: calc($modal-item-width - 5%);
+
+      &-input {
+         width: 100%;
+         height: 100%;
+      }
+
+      &-submit {
+         position: absolute;
+         border: none;
+         outline: none;
+         height: 1.25rem;
+         width: 1.25rem;
+         background: $list-button-bg;
+         color: $list-button-txt;
+         display: grid;
+         place-items: center;
+         top: 0;
+         left: 0;
+         transform: translate(-150%, 60%);
+
+         &:hover, & * {
+            background: $list-button-bg-hover;
+            color: $list-button-txt-hover;
+         }
+      }
+   }
+}

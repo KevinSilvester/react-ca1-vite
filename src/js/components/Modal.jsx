@@ -3,10 +3,12 @@ import { createPortal } from 'react-dom'
 import { DataCtx } from '../contexts/DataCtx'
 import Button from './Button'
 import List from './List'
+import FormGroup from './FormGroup'
+import Label from './Label'
 import counties from '../data/counties'
 import { deepEqual } from '../utils/compare'
 
-const Modal = (props) => {
+const Modal = props => {
    const { _edit } = useContext(DataCtx)
    const [edit, setEdit] = _edit
 
@@ -15,25 +17,31 @@ const Modal = (props) => {
    const addMode = props.add
 
    const [name, setName] = addMode ? useState('') : useState(attraction.name)
-   const [locality, setLocality] = addMode ? useState('') : useState(attraction.address.locality)
-   const [county, setCounty] = addMode ? useState('') : useState(attraction.address.county)
+   const [locality, setLocality] = addMode
+      ? useState('')
+      : useState(attraction.address.locality)
+   const [county, setCounty] = addMode
+      ? useState('')
+      : useState(attraction.address.county)
    const [phone, setPhone] = addMode ? useState('') : useState(attraction.phone)
    const [web, setWeb] = addMode ? useState('') : useState(attraction.website)
    const [type, setType] = addMode ? useState('') : useState(attraction.type)
    const [tags, setTabs] = addMode ? useState('') : useState(attraction.tags)
 
    const [modalOpen, setModalOpen] = useState(true)
-
-   useEffect(() => nameInput.current.focus(), [])
+   const [tagListOpen, setTagListOpen] = useState(false)
+   const [typeListOpen, setTypeListOpen] = useState(false)
 
    const nameInput = useRef(null)
+
+   useEffect(() => nameInput.current.focus(), [])
 
    const handleClose = () => {
       setModalOpen(false)
       setTimeout(() => close(), 200)
    }
 
-   const handleConfirm = (e) => {
+   const handleConfirm = e => {
       e.preventDefault()
       const finalEdit = {
          id: attraction.id,
@@ -51,23 +59,22 @@ const Modal = (props) => {
       handleClose()
    }
 
-   const handleCancel = (e) => {
+   const handleCancel = e => {
       e.preventDefault()
       handleClose()
    }
 
    const expandTags = e => {
       e.preventDefault()
-      console.log(e)
+      setTagListOpen(!tagListOpen)
+      console.log(counties.length)
    }
 
    const expandTypes = e => {
       e.preventDefault()
    }
 
-   const handleTags = e => {
-
-   }
+   const handleTags = e => {}
 
    return createPortal(
       <div
@@ -77,99 +84,106 @@ const Modal = (props) => {
       >
          <form
             onSubmit={() => handleSubmit()}
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
             className='modal__form'
          >
-            <h3 className='modal__form-title'>Edit Attraction</h3>
+            <h3 className='modal__form-title'>{addMode ? 'Add Attraction' : 'Edit Attraction'}</h3>
             <div className='modal__form-input-container'>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>Name</span>
+               <FormGroup>
+                  <Label>Name</Label>
                   <input
                      name='name'
                      type='text'
                      className='modal__form-input'
                      placeholder='Name'
                      value={name}
-                     onChange={(e) => setName(e.target.value)}
+                     onChange={e => setName(e.target.value)}
                      ref={nameInput}
                   />
-               </div>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>Locality</span>
-
+               </FormGroup>
+               <FormGroup>
+                  <Label>Locality</Label>
                   <input
                      name='locality'
                      type='text'
                      className='modal__form-input'
                      placeholder='Locality'
                      value={locality}
-                     onChange={(e) => setLocality(e.target.value)}
+                     onChange={e => setLocality(e.target.value)}
                   />
-               </div>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>County</span>
+               </FormGroup>
+               <FormGroup>
+                  <Label>County</Label>
                   <select
                      name='county'
                      className='modal__form-select'
                      value={county}
-                     onChange={(e) => setCounty(e.target.value)}
+                     onChange={e => setCounty(e.target.value)}
                   >
                      {addMode && (
                         <option hidden value='Choose County'>
                            Choose County
                         </option>
                      )}
-                     {counties.map((e) => (
-                        <option key={e} value={e}>
-                           {e}
+                     {counties.map(county => (
+                        <option key={county} value={county}>
+                           {county}
                         </option>
                      ))}
                   </select>
-               </div>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>Phone No.</span>
+               </FormGroup>
+               <FormGroup>
+                  <Label>Phone No.</Label>
                   <input
                      name='phone'
                      type='text'
                      className='modal__form-input'
                      placeholder='Phone No.'
                      value={phone}
-                     onChange={(e) => setPhone(e.target.value)}
+                     onChange={e => setPhone(e.target.value)}
                   />
-               </div>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>
-                     Website/Social Media
-                  </span>
+               </FormGroup>
+               <FormGroup>
+                  <Label>Website/Social Media</Label>
                   <input
                      name='website'
                      type='text'
                      className='modal__form-input'
                      placeholder='Website/Social Media'
                      value={web}
-                     onChange={(e) => setWeb(e.target.value)}
+                     onChange={e => setWeb(e.target.value)}
                   />
-               </div>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>Tags</span>
-                  <List expand={expandTags} init={tags} return={handleTags} />
-                  <Button fill large click={expandTags}>
-                     <i className='fas fa-chevron-up'></i>
+               </FormGroup>
+               <FormGroup>
+                  <Label>Tags</Label>
+                  {tagListOpen && <List list={attraction.tags} />}
+                  <Button
+                     fill
+                     large
+                     click={expandTags}
+                     attributes={{ role: 'button', id: 'tag-button' }}
+                  >
+                     <i className={`fas fa-chevron-${tagListOpen ? 'down' : 'up'}`}></i>
                   </Button>
-               </div>
-               <div className='modal__form-group'>
-                  <span className='modal__form-label'>Place Type</span>
-                  <Button fill large click={expandTypes}>
-                     <i className='fas fa-chevron-up'></i>
+               </FormGroup>
+               <FormGroup>
+                  <Label>Place Type</Label>
+                  <Button
+                     fill
+                     large
+                     click={expandTypes}
+                     attributes={{ role: 'button', id: 'type-button' }}
+                  >
+                     <i className={`fas fa-chevron-${typeListOpen ? 'down' : 'up'}`}></i>
                   </Button>
-               </div>
+               </FormGroup>
             </div>
             <div className='modal__form-btn'>
-               <Button fill click={handleConfirm}>
+               <Button fill click={handleConfirm} attributes={{ role: 'button' }}>
                   <i className='fas fa-check'></i>
                   <span>Confirm</span>
                </Button>
-               <Button fill click={handleCancel}>
+               <Button fill click={handleCancel} attributes={{ role: 'button' }}>
                   <i className='fas fa-times'></i>
                   <span>Cancel</span>
                </Button>

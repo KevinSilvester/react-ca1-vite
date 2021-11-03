@@ -9,17 +9,21 @@
    --dark-grey-1: hsl(0, 0%, 21%);
    --dark-grey-2: hsl(0, 0%, 29%);
    --dark-grey-3: hsl(0, 0%, 16%);
+   --dark-grey-4: hsl(0, 0%, 7%);
    
-   --grey-1: #bababa;
+   --grey-1: hsl(0, 0%, 73%);
 
    --light-grey-1: hsl(0, 3%, 93%);
 }
 
 $text: var(--light-grey-1);
+$body: var(--dark-grey-4);
 
 $modal-wrapper-bg: var(--black-opaque);
 $modal-form-bg: var(--dark-grey-3);
 $modal-form-border: var(--grey-1);
+$modal-item-width: 20rem;
+$modal-item-height: 2.25rem;
 
 $input-border: var(--pink-opaque);
 $input-focus-border: var(--pink-1);
@@ -30,7 +34,17 @@ $btn-wrapper-bg-hov: var(--pink-1);
 $btn-body-bg: var(--dark-grey-3);
 
 $card-bg: var(--dark-grey-3);
+$card-border: var(--pink-1);
+$card-img-border: var(--grey-1);
+$card-img-border-hover: var(--light-grey-1);
 
 $tooltip-bg: var(--pink-1);
 $tooltip-border: var(--pink-1);
+
+$list-bg: var(--light-grey-1);
+$list-txt: var(--dark-grey-2);
+$list-button-bg: white;
+$list-button-txt: var(--dark-grey-2);
+$list-button-bg-hover: var(--light-grey-1);
+$list-button-txt-hover: var(--dark-grey-3);
 

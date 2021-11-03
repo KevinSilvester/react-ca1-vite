@@ -44,11 +44,11 @@ const Card = (props) => {
                      fill
                      click={handleLink}
                      attributes={
-                        !attraction.website && {
+                        !attraction.website ? {
                            ['data-tooltip']: true,
                            ['data-msg']: 'No Link Available',
-                           disabled: true
-                        }
+                           disabled: true,
+                        } : { role: 'link'}
                      }
                   >
                      <a
@@ -60,11 +60,11 @@ const Card = (props) => {
                         <span>Visit Site</span>
                      </a>
                   </Button>
-                  <Button fill click={handleOpen}>
+                  <Button fill click={handleOpen} attributes={{ role: 'button' }}>
                      <i className='fas fa-edit' />
                      <span>Edit</span>
                   </Button>
-                  <Button fill click={handleDelete}>
+                  <Button fill click={handleDelete} attributes={{ role: 'button' }}>
                      <i className='fas fa-trash-alt' />
                      <span>Delete</span>
                   </Button>

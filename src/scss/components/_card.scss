@@ -4,21 +4,33 @@
 	animation: expand 0.3s forwards;
 	margin-top: 2rem;
 	height: 24.5rem;
+   border-radius: 0.7rem;
+   border: $card-border solid 2px;
 
 	&__img {
 		height: 100%;
 		position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
 		&-container {
 			position: relative;
-			height: 50%;
-			display: grid;
-			place-items: center;
+			height: 60%;
+         width: 90%;
+         margin: 1rem auto 0 auto;
+         border: $card-img-border 0.22rem solid;
+         border-radius: 0.5rem;
+         transition: all 0.2s ease-in-out;
+
+         &:hover {
+            border: $card-img-border-hover 0.22rem solid;
+         }
 		}
 	}
 
 	&-title {
-		font-size: 1.1rem !important;
+		font-size: 1.1rem;
 	}
 
 	&-subtitle {

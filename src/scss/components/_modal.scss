@@ -27,7 +27,7 @@
    &__form {
       background: $modal-form-bg;
       height: calc(25rem + 10%);
-      width: calc(25rem + 10%);
+      width: 37rem;
       text-align: center;
       border-radius: 20px;
       border: solid $modal-form-border 3px;
@@ -48,6 +48,7 @@
       }
 
       &-group {
+         position: relative;
          width: 100%;
          display: grid;
          grid-template-columns: 2fr 4fr;
@@ -61,8 +62,8 @@
       }
 
       &-input, &-select {
-         width: 20rem;
-         height: 2.25rem;
+         width: $modal-item-width;
+         height: $modal-item-height;
          border-radius: 0.35rem;
          border: solid $input-border 3px;
          outline: none;
@@ -73,15 +74,6 @@
             border: solid $input-focus-border 3px;
             background: $input-focus-bg;
          }
-      }
-      
-      &-input {
-         width: 20rem;
-         padding: 5px;
-      }
-
-      &-select {
-         width: 20rem;
       }
 
       &-btn {

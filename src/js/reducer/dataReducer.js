@@ -74,6 +74,27 @@ export const dataReducer = (state, action) => {
             ]
          }
       }
+      
+      case 'SORT_NAME': {
+         return {
+            ...state,
+            displayData: [...state.data.sort((a, b) => (a.name < b.name ? -1 : 1))]
+         }
+      }
+
+      case 'SORT_COUNTY': {
+         return {
+            ...state,
+            displayData: [...state.data.sort((a, b) => (a.address.county < b.address.county ? -1 : 1))]
+         }
+      }
+
+      case 'FILTER_COUNTY': {
+         return {
+            ...state,
+            displayData: [...state.data.filter(e => e.address.county.toLowerCase().match(new RegExp(action.query.toLowerCase())))]
+         }
+      }
 
       default:
          break
