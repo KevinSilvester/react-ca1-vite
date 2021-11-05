@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useContext } from 'react'
 import { DataCtx } from '../contexts/DataCtx'
 import img from './../../assets/ireland.svg'
-import Modal from './Modal'
+import Modal from './Modal/Modal'
 import Button from './Button'
 
 // https://codepen.io/nikki-peel/pen/RwavQer

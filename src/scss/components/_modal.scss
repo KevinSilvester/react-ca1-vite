@@ -27,7 +27,7 @@
    &__form {
       background: $modal-form-bg;
       height: calc(25rem + 10%);
-      width: 37rem;
+      width: 35rem;
       text-align: center;
       border-radius: 20px;
       border: solid $modal-form-border 3px;
@@ -59,6 +59,11 @@
          text-align: right;
          margin-right: 1.5rem;
          padding-left: 1rem;
+         font-size: 1.1rem;
+      }
+
+      &-input {
+         padding: 0.2rem;
       }
 
       &-input, &-select {

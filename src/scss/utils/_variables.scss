@@ -1,50 +1,60 @@
 :root {
    --black-opaque: #00000080;
    --pink-opaque: hsla(349, 97%, 63%, 0.6);
-
    --pink-1: hsl(349, 97%, 63%);
    --pink-2: hsl(349, 97%, 61%);
    --pink-3: hsl(345, 89%, 69%);
-
    --dark-grey-1: hsl(0, 0%, 21%);
    --dark-grey-2: hsl(0, 0%, 29%);
    --dark-grey-3: hsl(0, 0%, 16%);
    --dark-grey-4: hsl(0, 0%, 7%);
-   
    --grey-1: hsl(0, 0%, 73%);
-
    --light-grey-1: hsl(0, 3%, 93%);
 }
 
+// global
 $text: var(--light-grey-1);
 $body: var(--dark-grey-4);
 
+// modal
 $modal-wrapper-bg: var(--black-opaque);
 $modal-form-bg: var(--dark-grey-3);
 $modal-form-border: var(--grey-1);
 $modal-item-width: 20rem;
 $modal-item-height: 2.25rem;
 
+// modal input
 $input-border: var(--pink-opaque);
 $input-focus-border: var(--pink-1);
 $input-focus-bg: var(--dark-grey-2);
 
+// button component
 $btn-wrapper-bg: var(--pink-opaque);
 $btn-wrapper-bg-hov: var(--pink-1);
 $btn-body-bg: var(--dark-grey-3);
 
+// card
 $card-bg: var(--dark-grey-3);
 $card-border: var(--pink-1);
 $card-img-border: var(--grey-1);
 $card-img-border-hover: var(--light-grey-1);
 
+// tooltip
 $tooltip-bg: var(--pink-1);
 $tooltip-border: var(--pink-1);
 
-$list-bg: var(--light-grey-1);
-$list-txt: var(--dark-grey-2);
-$list-button-bg: white;
+// modal tag and types list
+$list-bg: white;
+$list-txt: var(--dark-grey-4);
+$list-border: var(--grey-1);
+$list-button-bg: var(--light-grey-1);
 $list-button-txt: var(--dark-grey-2);
-$list-button-bg-hover: var(--light-grey-1);
-$list-button-txt-hover: var(--dark-grey-3);
-
+$list-button-bg-hover: var(--dark-grey-2);
+$list-button-txt-hover: white;
+$list-button-bg-active: var(--dark-grey-4);
+$list-input-border: var(--pink-1);
+$list-input-txt: var(--dark-grey-3);
+$list-scroll-bg: var(--light-grey-1);
+$list-scroll-thumb: var(--dark-grey-4);
+$list-scroll-thumb-hover: var(--dark-grey-3);
+$list-scroll-thumb-active: var(--dark-grey-2);

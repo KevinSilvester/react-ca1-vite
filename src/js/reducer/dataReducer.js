@@ -48,6 +48,30 @@ export const dataReducer = (state, action) => {
          }
       }
 
+      case 'REMOVE': {
+         return {
+            ...state,
+            data: [
+               ...state.data.slice(
+                  0,
+                  state.data.findIndex(e => e.id === action.attraction.id)
+               ),
+               ...state.data.slice(
+                  state.data.findIndex(e => e.id === action.attraction.id) + 1
+               )
+            ],
+            displayData: [
+               ...state.displayData.slice(
+                  0,
+                  state.displayData.findIndex(e => e.id === action.attraction.id)
+               ),
+               ...state.displayData.slice(
+                  state.displayData.findIndex(e => e.id === action.attraction.id) + 1
+               )
+            ]
+         }
+      }
+
       // https://stackoverflow.com/questions/45673783/replace-array-entry-with-spread-syntax-in-one-line-of-code
       case 'EDIT': {
          return {

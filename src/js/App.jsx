@@ -38,8 +38,8 @@ const App = () => {
                      county: e.address.addressRegion
                   },
                   tags: e.tags,
-                  phone: e.telephone,
-                  website: e.url
+                  phone: e?.telephone,
+                  website: e?.url
                }
                temp.push(attraction)
             })
@@ -54,6 +54,13 @@ const App = () => {
          setEdit({})
       }
    }, [edit])
+
+   useEffect(() => {
+      if (Object.keys(remove).length !== 0) {
+         dispatch({ type: 'REMOVE', attraction: remove })
+         setEdit({})
+      }
+   }, [remove])
 
    const handleFilterSort = (data, sortVal) => {}
 

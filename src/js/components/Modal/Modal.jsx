@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { DataCtx } from '../contexts/DataCtx'
-import Button from './Button'
+import { DataCtx } from './../../contexts/DataCtx'
+import Button from './../Button'
 import List from './List'
 import FormGroup from './FormGroup'
 import Label from './Label'
-import counties from '../data/counties'
-import { deepEqual } from '../utils/compare'
+import counties from './../../data/counties'
+import { deepEqual } from './../../utils/compare'
 
 const Modal = props => {
    const { _edit } = useContext(DataCtx)
@@ -17,16 +17,12 @@ const Modal = props => {
    const addMode = props.add
 
    const [name, setName] = addMode ? useState('') : useState(attraction.name)
-   const [locality, setLocality] = addMode
-      ? useState('')
-      : useState(attraction.address.locality)
-   const [county, setCounty] = addMode
-      ? useState('')
-      : useState(attraction.address.county)
+   const [locality, setLocality] = addMode ? useState('') : useState(attraction.address.locality)
+   const [county, setCounty] = addMode ? useState('') : useState(attraction.address.county)
    const [phone, setPhone] = addMode ? useState('') : useState(attraction.phone)
    const [web, setWeb] = addMode ? useState('') : useState(attraction.website)
-   const [type, setType] = addMode ? useState('') : useState(attraction.type)
-   const [tags, setTabs] = addMode ? useState('') : useState(attraction.tags)
+   const [type, setType] = addMode ? useState([]) : useState(attraction.type)
+   const [tags, setTags] = addMode ? useState([]) : useState(attraction.tags)
 
    const [modalOpen, setModalOpen] = useState(true)
    const [tagListOpen, setTagListOpen] = useState(false)
@@ -67,11 +63,33 @@ const Modal = props => {
    const expandTags = e => {
       e.preventDefault()
       setTagListOpen(!tagListOpen)
-      console.log(counties.length)
+      typeListOpen && setTypeListOpen(false)
    }
 
    const expandTypes = e => {
       e.preventDefault()
+      setTypeListOpen(!typeListOpen)
+      tagListOpen && setTagListOpen(false)
+   }
+
+   const addTag = (e, newTag) => {
+      e.preventDefault()
+      if (newTag.length > 0 && !tags.includes(newTag))
+         setTags([...tags, newTag])
+   }
+   const removeTag = (e, index) => {
+      e.preventDefault()
+      setTags([...tags.slice(0, index), ...tags.slice(index+1)])
+   }
+
+   const addType = (e, newType) => {
+      e.preventDefault()
+      if (newType.length > 0 && !type.includes(newType))
+         setType([...type, newType])
+   }
+   const removeType = (e, index) => {
+      e.preventDefault()
+      setType([...type.slice(0, index), ...type.slice(index+1)])
    }
 
    const handleTags = e => {}
@@ -84,7 +102,11 @@ const Modal = props => {
       >
          <form
             onSubmit={() => handleSubmit()}
-            onClick={e => e.stopPropagation()}
+            onClick={e => {
+               e.stopPropagation()
+               typeListOpen && setTypeListOpen(false)
+               tagListOpen && setTagListOpen(false)
+            }}
             className='modal__form'
          >
             <h3 className='modal__form-title'>{addMode ? 'Add Attraction' : 'Edit Attraction'}</h3>
@@ -156,7 +178,7 @@ const Modal = props => {
                </FormGroup>
                <FormGroup>
                   <Label>Tags</Label>
-                  {tagListOpen && <List list={attraction.tags} />}
+                  {tagListOpen && <List list={tags} add={addTag} remove={removeTag} />}
                   <Button
                      fill
                      large
@@ -168,6 +190,7 @@ const Modal = props => {
                </FormGroup>
                <FormGroup>
                   <Label>Place Type</Label>
+                  {typeListOpen && <List list={type} add={addType} remove={removeType} />}
                   <Button
                      fill
                      large
