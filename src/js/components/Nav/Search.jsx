@@ -16,15 +16,16 @@ const Search = props => {
    }
 
    return (
-      <div role='form' className='search__container'>
+      <div role='form' className='search__container d-flex my-2 my-md-0'>
          <input
-            className='search__input'
-            type='text'
+            className='search__input form-control'
+            type='search'
             onChange={e => handleChange(e)}
             value={val}
             placeholder='Search'
+            aria-label='Search'
          />
-         <button className='search__clear' onClick={() => handleClick()}>
+         <button className='search__btn' onClick={() => handleClick()}>
             <i className='fas fa-times'></i>
          </button>
       </div>

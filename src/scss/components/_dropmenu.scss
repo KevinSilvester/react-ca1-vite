@@ -1,0 +1,16 @@
+.dropdown {
+   &-menu {
+      border: $nav-border 0.24rem solid;
+      border-radius: 0.75rem;
+   }
+
+   &-item {
+      background-color: inherit !important;
+      
+      label,
+      select,
+      option {
+         color: $dropdown-txt !important;
+      }
+   }
+}

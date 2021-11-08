@@ -1,0 +1,35 @@
+.add {
+   &__wrapper {
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+         .add__container {
+            border: $add-border-hov 0.25rem solid;
+            background: $add-bg-hov;
+
+            .fas {
+               color: $add-txt-hov;
+            }
+         }
+      }
+   }
+
+   &__container {
+      width: 80%;
+      height: 80%;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: $add-border 0.25rem solid;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease-in-out;
+
+      .fas {
+         font-size: 14rem;
+         transition: all 0.2s ease-in-out;
+      }
+   }
+}

@@ -12,7 +12,7 @@
       user-select: none;
       pointer-events: none;
       overflow: hidden;
-      animation: list_open 0.2s forwards;
+      animation: list_open 0.15s forwards;
 
       @keyframes list_open {
          from {
@@ -115,7 +115,8 @@
          right: 0;
          transform: translate(-23%, 23%);
          position: absolute;
-         border: 2px solid $list-button-txt;
+         background: $list-button-bg-2;
+         // border: 1.5px solid $list-button-txt;
       }
 
       .fas {

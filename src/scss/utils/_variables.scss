@@ -5,7 +5,7 @@
    --pink-2: hsl(349, 97%, 61%);
    --pink-3: hsl(345, 89%, 69%);
    --dark-grey-1: hsl(0, 0%, 21%);
-   --dark-grey-2: hsl(0, 0%, 29%);
+   --dark-grey-2: hsl(0, 0%, 25%);
    --dark-grey-3: hsl(0, 0%, 16%);
    --dark-grey-4: hsl(0, 0%, 7%);
    --grey-1: hsl(0, 0%, 73%);
@@ -37,6 +37,7 @@ $btn-body-bg: var(--dark-grey-3);
 $card-bg: var(--dark-grey-3);
 $card-border: var(--pink-1);
 $card-img-border: var(--grey-1);
+$card-img-bg-hov: var(--dark-grey-2);
 $card-img-border-hover: var(--light-grey-1);
 
 // tooltip
@@ -48,6 +49,7 @@ $list-bg: white;
 $list-txt: var(--dark-grey-4);
 $list-border: var(--grey-1);
 $list-button-bg: var(--light-grey-1);
+$list-button-bg-2: var(--grey-1);
 $list-button-txt: var(--dark-grey-2);
 $list-button-bg-hover: var(--dark-grey-2);
 $list-button-txt-hover: white;
@@ -58,3 +60,28 @@ $list-scroll-bg: var(--light-grey-1);
 $list-scroll-thumb: var(--dark-grey-4);
 $list-scroll-thumb-hover: var(--dark-grey-3);
 $list-scroll-thumb-active: var(--dark-grey-2);
+
+// navbar
+$nav-txt: var(--light-grey-1);
+$nav-bg: var(--dark-grey-3);
+$nav-toggle: var(--pink-1);
+$nav-border: var(--pink-1);
+$nav-link-bg: var(--pink-opaque);
+$nav-link-bg-hov: var(--pink-1);
+
+// add
+$add-txt-hov: white;
+$add-border: var(--grey-1);
+$add-bg-hov: var(--dark-grey-2);
+$add-border-hov: var(--light-grey-1);
+
+// search
+$search-border: var(--pink-1);
+$search-btn-bg: var(--grey-1);
+$search-btn-txt: var(--dark-grey-2);
+$search-btn-bg-hover: var(--dark-grey-2);
+$search-btn-txt-hover: white;
+$search-btn-bg-active: var(--dark-grey-4);
+
+// dropdown
+$dropdown-txt: var(--dark-grey-2);

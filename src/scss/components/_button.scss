@@ -24,6 +24,10 @@
          background: $btn-wrapper-bg-hov;
       }
 
+      &.active {
+         background: $btn-wrapper-bg-hov;
+      }
+
       &[data-tooltip=true] {
          &::before {
             content: '';

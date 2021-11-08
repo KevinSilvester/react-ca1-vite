@@ -26,7 +26,7 @@ const List = props => {
          </ul>
          <div role='form' className="list__form">
             <input type="text" className="list__input" value={val} onChange={e => setVal(e.target.value)} />
-            <button className="list__btn list__btn--submit" onClick={e => add(e, val)}>
+            <button className="list__btn list__btn--submit" onClick={e => (add(e, val), setVal(''))}>
                <i className="fas fa-plus"></i>
             </button>
          </div>

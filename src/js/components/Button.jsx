@@ -1,12 +1,13 @@
 const Button = props => {
-   const handleClick = props.click
+   const handleClick = props.click || (() => {return})
    const large = props.large
    const fill = props.fill
    const attributes = props.attributes
+   const active = props.active
 
    return (
       <button
-         className={`btn__wrapper btn__wrapper--${large ? 'lg' : 'sm'}`}
+         className={`btn__wrapper btn__wrapper--${large ? 'lg' : 'sm'}  ${active && 'active'}`}
          onClick={e => handleClick(e)}
          {...attributes}
       >

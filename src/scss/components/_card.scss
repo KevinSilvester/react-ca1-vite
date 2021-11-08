@@ -22,11 +22,20 @@
          border: $card-img-border 0.22rem solid;
          border-radius: 0.5rem;
          transition: all 0.2s ease-in-out;
+         cursor: pointer;
+         overflow: hidden;
 
          &:hover {
             border: $card-img-border-hover 0.22rem solid;
+            background: $card-img-bg-hov;
          }
 		}
+
+      &--iframe {
+         position: relative;
+         width: 100%;
+         height: 100%;
+      }
 	}
 
 	&-title {

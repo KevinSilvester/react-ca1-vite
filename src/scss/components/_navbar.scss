@@ -1,0 +1,56 @@
+.navbar {
+   background: $nav-bg;
+   padding: 0.5rem 0.6rem;
+   border: $nav-border 2px solid;
+   border-radius: 0.5rem !important;
+
+   &-toggler {
+      background: $nav-toggle;
+       
+      &-icon {
+         display: grid;
+         place-items: center;
+      }
+   }
+}
+
+.nav {
+   &-item {
+      &:not(:nth-last-child(1)) {
+         margin-right: 1rem;
+      }
+   }
+
+   &-link {
+      background: $nav-link-bg;
+      color: $nav-txt;
+      border-radius: 0.35rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+
+      &::after {
+         display: none;
+      }
+
+      &:hover {
+         background: $nav-link-bg-hov;
+         color: $nav-txt;
+      }
+
+      &[data-disabled=true] {
+         background: $nav-link-bg !important;
+         color: $nav-txt !important;
+         cursor: auto;
+      }
+
+      &[data-active=true] {
+         background: $nav-link-bg-hov !important;
+         color: $nav-txt !important;
+         cursor: pointer;
+      }
+
+      i {
+         margin-left: 0.3rem;
+      }
+   }
+}

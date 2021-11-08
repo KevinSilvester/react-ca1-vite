@@ -7,18 +7,24 @@ import FormGroup from './FormGroup'
 import Label from './Label'
 import counties from './../../data/counties'
 import { deepEqual } from './../../utils/compare'
+import { randomId } from '../../utils/randomId'
 
 const Modal = props => {
-   const { _edit } = useContext(DataCtx)
+   const { _edit, _add } = useContext(DataCtx)
    const [edit, setEdit] = _edit
+   const [add, setAdd] = _add
 
    const close = props.close
    const attraction = props.attr
    const addMode = props.add
 
    const [name, setName] = addMode ? useState('') : useState(attraction.name)
-   const [locality, setLocality] = addMode ? useState('') : useState(attraction.address.locality)
-   const [county, setCounty] = addMode ? useState('') : useState(attraction.address.county)
+   const [locality, setLocality] = addMode
+      ? useState('')
+      : useState(attraction.address.locality)
+   const [county, setCounty] = addMode
+      ? useState('')
+      : useState(attraction.address.county)
    const [phone, setPhone] = addMode ? useState('') : useState(attraction.phone)
    const [web, setWeb] = addMode ? useState('') : useState(attraction.website)
    const [type, setType] = addMode ? useState([]) : useState(attraction.type)
@@ -39,19 +45,36 @@ const Modal = props => {
 
    const handleConfirm = e => {
       e.preventDefault()
-      const finalEdit = {
-         id: attraction.id,
-         name: name,
-         type: type,
-         address: {
-            locality: locality,
-            county: county
-         },
-         tags: tags,
-         phone: phone,
-         website: web
+      if (name.length === 0 || locality.length === 0 || county.length === 0) return
+      if (addMode) {
+         const finalEdit = {
+            id: randomId(),
+            name: name,
+            type: type,
+            address: {
+               locality: locality,
+               county: county
+            },
+            tags: tags,
+            phone: phone,
+            website: web
+         }
+         setAdd(finalEdit)
+      } else {
+         const finalEdit = {
+            id: attraction.id,
+            name: name,
+            type: type,
+            address: {
+               locality: locality,
+               county: county
+            },
+            tags: tags,
+            phone: phone,
+            website: web
+         }
+         !deepEqual(finalEdit, attraction) && setEdit(finalEdit)
       }
-      !deepEqual(finalEdit, attraction) && setEdit(finalEdit)
       handleClose()
    }
 
@@ -74,25 +97,21 @@ const Modal = props => {
 
    const addTag = (e, newTag) => {
       e.preventDefault()
-      if (newTag.length > 0 && !tags.includes(newTag))
-         setTags([...tags, newTag])
+      if (newTag.length > 0 && !tags.includes(newTag)) setTags([...tags, newTag])
    }
    const removeTag = (e, index) => {
       e.preventDefault()
-      setTags([...tags.slice(0, index), ...tags.slice(index+1)])
+      setTags([...tags.slice(0, index), ...tags.slice(index + 1)])
    }
 
    const addType = (e, newType) => {
       e.preventDefault()
-      if (newType.length > 0 && !type.includes(newType))
-         setType([...type, newType])
+      if (newType.length > 0 && !type.includes(newType)) setType([...type, newType])
    }
    const removeType = (e, index) => {
       e.preventDefault()
-      setType([...type.slice(0, index), ...type.slice(index+1)])
+      setType([...type.slice(0, index), ...type.slice(index + 1)])
    }
-
-   const handleTags = e => {}
 
    return createPortal(
       <div
@@ -109,7 +128,9 @@ const Modal = props => {
             }}
             className='modal__form'
          >
-            <h3 className='modal__form-title'>{addMode ? 'Add Attraction' : 'Edit Attraction'}</h3>
+            <h3 className='modal__form-title'>
+               {addMode ? 'Add Attraction' : 'Edit Attraction'}
+            </h3>
             <div className='modal__form-input-container'>
                <FormGroup>
                   <Label>Name</Label>
@@ -184,6 +205,7 @@ const Modal = props => {
                      large
                      click={expandTags}
                      attributes={{ role: 'button', id: 'tag-button' }}
+                     active={tagListOpen}
                   >
                      <i className={`fas fa-chevron-${tagListOpen ? 'down' : 'up'}`}></i>
                   </Button>
@@ -196,6 +218,7 @@ const Modal = props => {
                      large
                      click={expandTypes}
                      attributes={{ role: 'button', id: 'type-button' }}
+                     active={typeListOpen}
                   >
                      <i className={`fas fa-chevron-${typeListOpen ? 'down' : 'up'}`}></i>
                   </Button>
