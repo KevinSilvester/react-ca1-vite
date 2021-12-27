@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Modal from './Modal/Modal'
 
-// https://codepen.io/nikki-peel/pen/RwavQer
 const Add = () => {
    const [open, setOpen] = useState(false)
 

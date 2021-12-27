@@ -23,7 +23,7 @@ const App = () => {
    const [remove, setRemove] = _remove
 
    const [state, dispatch] = useReducer(dataReducer, initialState)
-   const { data, filterData, displayData, error, loaded } = state
+   const { displayData, error, loaded } = state
 
    const [disabled, setDisabled] = useState(false)
    const [active, setActive] = useState('')
@@ -55,7 +55,6 @@ const App = () => {
 
    useEffect(() => {
       if (Object.keys(add).length !== 0) {
-         console.log(add)
          dispatch({ type: 'ADD', attraction: add })
          setAdd({})
       }

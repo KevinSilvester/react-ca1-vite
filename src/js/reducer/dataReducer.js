@@ -1,5 +1,3 @@
-import { randomId } from '../utils/randomId'
-
 export const initialState = {
    data: [],
    filterData: [],
